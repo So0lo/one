@@ -19,9 +19,18 @@ export class App extends Component {
         .then(({data}) => this.setState({users: data})) 
     }
 
+    handleClick = (seachName) => {
+        const filteredUsers = this.state.users.filter(
+            ({first_name, last_name}) => first_name.toLowerCase().includes(seachName) ||
+            last_name.toLowerCase().includes(seachName)
+        );
+
+        console.log(filteredUsers);
+    }
+
     render() {
         return (<div>
-            <SearchBar/>
+            <SearchBar whenClick={this.handleClick}/>
             <UserList users={this.state.users}/>
         </div>)
     }
